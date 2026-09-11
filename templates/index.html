@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microblog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div class="wordmark">
+          <svg
+            width="30"
+            height="26"
+            viewBox="0 0 30 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path
+              d="M2 2h26v15H12l-5 6v-6H2V2z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round" />
+          </svg>
+          <span class="wordmark-text">Microblog</span>
+        </div>
+        <nav class="tabs">
+          <a href="#" class="active">Recent</a>
+          <a href="#">Calendar</a>
+        </nav>
+      </header>
+      <form action="/" method="post">
+        <div class="composer">
+          <label for="log">Write a log for today</label>
+          <textarea
+            id="log"
+            name="msg"
+            placeholder="What did you work on?"></textarea>
+          <div class="composer-foot">
+            <button class="stamp" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="entries">
+        {% for entry in entries %}
+        <article class="entry featured">
+          <div>
+            <h2 class="entry-title">{{ entry[1] | truncate(30,true) }}</h2>
+            <p class="entry-meta">{{ entry[2] }}</p>
+            <p class="entry-body">{{ entry[1] }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col brand">
+          <span>Made by Jose Salvatierra</span>
+          <a href="#">Check out my other projects</a>
+        </div>
+        <div class="footer-col">
+          <a href="#">Recent</a>
+          <a href="#">Calendar</a>
+        </div>
+        <div class="footer-col">
+          <a href="#">About</a>
+          <a href="#">How this was made</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
