@@ -1,71 +1,214 @@
+:root {
+  --paper: #eef1ec;
+  --surface: #ffffff;
+  --surface-line: #e2e7de;
+  --ink: #202a22;
+  --ink-soft: #5b6b5f;
+  --ink-faint: #8b978a;
+  --rule: #d8ded2;
+  --rule-strong: #c3ccbb;
+  --accent: #d97a24;
+  --accent-ink: #7a3e00;
+  --accent-soft: #f4e0c4;
+  --stamp-bg: #202a22;
+  --stamp-fg: #eef1ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #171e18;
+    --surface: #1f2921;
+    --surface-line: #2b3a2c;
+    --ink: #e9ede4;
+    --ink-soft: #a3b09b;
+    --ink-faint: #6f7d6a;
+    --rule: #313f31;
+    --rule-strong: #3d4d3c;
+    --accent: #ef9a4c;
+    --accent-ink: #ffd9a8;
+    --accent-soft: #38291a;
+    --stamp-bg: #ef9a4c;
+    --stamp-fg: #17210f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #171e18;
+  --surface: #1f2921;
+  --surface-line: #2b3a2c;
+  --ink: #e9ede4;
+  --ink-soft: #a3b09b;
+  --ink-faint: #6f7d6a;
+  --rule: #313f31;
+  --rule-strong: #3d4d3c;
+  --accent: #ef9a4c;
+  --accent-ink: #ffd9a8;
+  --accent-soft: #38291a;
+  --stamp-bg: #ef9a4c;
+  --stamp-fg: #17210f;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
-  color: #1a1a1a;
-  background: #ffffff;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.55;
 }
 
+.page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+/* Header */
 .ht-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #111111;
-  color: #ffffff;
-  padding: 16px 24px;
+  gap: 1rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.25rem;
+  flex-wrap: wrap;
 }
 
-.ht-header__title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
+.ht-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--accent);
+}
+
+.ht-wordmark__text {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.ht-tabs {
+  display: flex;
+  gap: 1.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.ht-tabs a {
+  color: var(--ink-faint);
+  text-decoration: none;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ht-tabs a:hover {
+  color: var(--ink);
+}
+
+.ht-tabs a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.ht-tabs a.active {
+  color: var(--ink);
+  border-color: var(--accent);
 }
 
 .ht-header__add {
-  color: #ffffff;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--stamp-bg);
+  color: var(--stamp-fg);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: 3px;
+  padding: 0.65rem 1.1rem;
+  transform: rotate(-0.6deg);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .ht-header__add:hover {
-  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(0deg);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.ht-header__add:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .ht-main {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 20px 24px 40px;
+  padding-top: 0.25rem;
 }
 
 /* Week date strip */
 .ht-week {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 14px;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #e5e5e5;
+  gap: 0.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .ht-week__day {
-  color: #3b5bdb;
-  text-decoration: underline;
-  font-size: 0.9rem;
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 2.75rem;
+  padding: 0.55rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--surface-line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.ht-week__day:hover {
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+.ht-week__day:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ht-week__label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.ht-week__number {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .ht-week__day--active {
-  color: #1a1a1a;
-  font-weight: 700;
-  text-decoration: none;
+  background: var(--stamp-bg);
+  border-color: var(--stamp-bg);
+  color: var(--stamp-fg);
+}
+
+.ht-week__day--active .ht-week__label {
+  opacity: 0.7;
 }
 
 /* Habit list */
@@ -73,98 +216,151 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .ht-list__item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-line);
+  border-radius: 6px;
+  transition: border-color 0.15s ease;
+}
+
+.ht-list__item:hover {
+  border-color: var(--rule-strong);
 }
 
 .ht-list__form {
   margin: 0;
+  display: flex;
 }
 
 .ht-checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #bbbbbb;
-  border-radius: 4px;
-  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--rule-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: transparent;
   cursor: pointer;
   padding: 0;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .ht-checkbox:hover {
-  border-color: #888888;
+  border-color: var(--accent);
+}
+
+.ht-checkbox:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .ht-checkbox--checked {
-  background: #111111;
-  border-color: #111111;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
 }
 
 .ht-list__name {
   font-size: 1rem;
+  color: var(--ink);
 }
 
 .ht-empty {
-  padding: 24px 0;
-  color: #888888;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--ink-faint);
   font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px dashed var(--surface-line);
+  border-radius: 6px;
 }
 
 /* Add habit form */
 .ht-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 360px;
+  gap: 0.65rem;
+  max-width: 24rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-line);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem 1rem;
 }
 
 .ht-form__label {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .ht-form__input {
-  padding: 10px 12px;
+  padding: 0.6rem 0.7rem;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 1rem;
-  border: 1px solid #cccccc;
-  border-radius: 6px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--surface-line);
+  border-radius: 4px;
 }
 
 .ht-form__input:focus {
   outline: none;
-  border-color: #111111;
+  border-color: var(--accent);
 }
 
 .ht-form__actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 8px;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.4rem;
 }
 
 .ht-form__cancel {
-  color: #666666;
+  color: var(--ink-faint);
   text-decoration: none;
-  align-self: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+}
+
+.ht-form__cancel:hover {
+  color: var(--ink);
 }
 
 .ht-form__submit {
-  background: #111111;
-  color: #ffffff;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--stamp-bg);
+  color: var(--stamp-fg);
   border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-size: 0.95rem;
+  border-radius: 3px;
+  padding: 0.65rem 1.2rem;
   cursor: pointer;
+  transform: rotate(-0.6deg);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .ht-form__submit:hover {
-  background: #333333;
+  transform: rotate(0deg);
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.ht-form__submit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }

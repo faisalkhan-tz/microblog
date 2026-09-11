@@ -17,7 +17,11 @@
         class="ht-checkbox {% if habit.done %}ht-checkbox--checked{% endif %}"
         aria-pressed="{{ 'true' if habit.done else 'false' }}"
         aria-label="Toggle {{ habit.name }} for {{ selected_date }}"
-      ></button>
+      >
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true">
+          <path d="M1 5 4.3 8.5 11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
     </form>
     <span class="ht-list__name">{{ habit.name }}</span>
   </li>
