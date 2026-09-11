@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
+.ht-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #111111;
+  color: #ffffff;
+  padding: 16px 24px;
+}
+
+.ht-header__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.ht-header__add {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.ht-header__add:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ht-main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+}
+
+/* Week date strip */
+.ht-week {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ht-week__day {
+  color: #3b5bdb;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.ht-week__day--active {
+  color: #1a1a1a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Habit list */
+.ht-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ht-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ht-list__form {
+  margin: 0;
+}
+
+.ht-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bbbbbb;
+  border-radius: 4px;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ht-checkbox:hover {
+  border-color: #888888;
+}
+
+.ht-checkbox--checked {
+  background: #111111;
+  border-color: #111111;
+}
+
+.ht-list__name {
+  font-size: 1rem;
+}
+
+.ht-empty {
+  padding: 24px 0;
+  color: #888888;
+  font-size: 0.95rem;
+}
+
+/* Add habit form */
+.ht-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 360px;
+}
+
+.ht-form__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ht-form__input {
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+}
+
+.ht-form__input:focus {
+  outline: none;
+  border-color: #111111;
+}
+
+.ht-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ht-form__cancel {
+  color: #666666;
+  text-decoration: none;
+  align-self: center;
+  font-size: 0.9rem;
+}
+
+.ht-form__submit {
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.ht-form__submit:hover {
+  background: #333333;
+}

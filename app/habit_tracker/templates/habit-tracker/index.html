@@ -1,0 +1,34 @@
+{% extends "habit-tracker/layout.html" %}
+{% block main_content %}
+<nav class="ht-week" aria-label="Select a date">
+  {% for day in week %}
+  <a
+    class="ht-week__day {% if day.iso == selected_date %}ht-week__day--active{% endif %}"
+    href="{{ url_for('habit_tracker.index', date=day.iso) }}"
+  >{{ day.label }} {{ day.day_number }}</a>
+  {% endfor %}
+</nav>
+
+<ul class="ht-list">
+  {% for habit in habits %}
+  <li class="ht-list__item">
+    <form
+      class="ht-list__form"
+      action="{{ url_for('habit_tracker.toggle_habit', habit_id=habit._id) }}"
+      method="post"
+    >
+      <input type="hidden" name="date" value="{{ selected_date }}" />
+      <button
+        type="submit"
+        class="ht-checkbox {% if habit.done %}ht-checkbox--checked{% endif %}"
+        aria-pressed="{{ 'true' if habit.done else 'false' }}"
+        aria-label="Toggle {{ habit.name }} for {{ selected_date }}"
+      ></button>
+    </form>
+    <span class="ht-list__name">{{ habit.name }}</span>
+  </li>
+  {% else %}
+  <li class="ht-empty">No habits yet — add one to get started.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

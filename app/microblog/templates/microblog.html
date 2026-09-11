@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microblog</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('microblog.static', filename='microblog.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div class="wordmark">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="11" cy="11" r="3" fill="currentColor" />
+          </svg>
+          <span class="wordmark-text">Microblog</span>
+        </div>
+        <nav class="tabs">
+          <a class="active" href="{{ url_for('microblog.index') }}">Feed</a>
+          <a href="{{ url_for('habit_tracker.index') }}">Habits</a>
+        </nav>
+      </header>
+
+      <p class="streak">
+        <strong>{{ entries|length }}</strong> {{ "entry" if entries|length == 1 else "entries" }}
+      </p>
+
+      <form class="composer" action="{{ url_for('microblog.index') }}" method="post">
+        <label for="msg">New entry</label>
+        <textarea
+          id="msg"
+          name="msg"
+          placeholder="What's on your mind today?"
+          required
+        ></textarea>
+        <div class="composer-foot">
+          <button class="stamp" type="submit">Post</button>
+        </div>
+      </form>
+
+      <section class="entries">
+        {% for entry_id, content, date in entries %}
+        <article class="entry {% if loop.first %}featured{% endif %}">
+          <div class="entry-day"><span>{{ date }}</span></div>
+          <p class="entry-body">{{ content }}</p>
+        </article>
+        {% else %}
+        <p class="entry-body">No entries yet — write the first one above.</p>
+        {% endfor %}
+      </section>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col brand">Microblog</div>
+        <div class="footer-col">
+          <a href="{{ url_for('microblog.index') }}">Feed</a>
+          <a href="{{ url_for('habit_tracker.index') }}">Habits</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
