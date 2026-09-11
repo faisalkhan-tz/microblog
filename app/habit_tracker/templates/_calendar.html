@@ -1,5 +1,5 @@
 <nav class="ht-week" aria-label="Select a date">
-  {% for day in week %}
+  {% for day in week(selected_date) %}
   <a
     class="ht-week__day {% if day.iso == selected_date %}ht-week__day--active{% endif %}"
     href="{{ url_for('habit_tracker.index', date=day.iso) }}"
