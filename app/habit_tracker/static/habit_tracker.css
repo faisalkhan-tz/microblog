@@ -68,14 +68,13 @@ body {
 
 /* Header */
 .ht-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1.75rem;
   border-bottom: 1px solid var(--rule);
   margin-bottom: 2.25rem;
-  flex-wrap: wrap;
 }
 
 .ht-wordmark {
@@ -83,6 +82,7 @@ body {
   align-items: center;
   gap: 0.65rem;
   color: var(--accent);
+  justify-self: start;
 }
 
 .ht-wordmark__text {
@@ -100,6 +100,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
+  justify-self: center;
 }
 
 .ht-tabs a {
@@ -125,6 +126,7 @@ body {
 }
 
 .ht-header__add {
+  justify-self: end;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -136,6 +138,7 @@ body {
   padding: 0.65rem 1.1rem;
   transform: rotate(-0.6deg);
   transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
 }
 
 .ht-header__add:hover {
@@ -153,10 +156,25 @@ body {
   padding-top: 0.25rem;
 }
 
+@media (max-width: 30rem) {
+  .ht-header {
+    grid-template-columns: 1fr auto;
+    row-gap: 1rem;
+  }
+
+  .ht-wordmark {
+    grid-column: 1 / -1;
+  }
+
+  .ht-tabs {
+    justify-self: start;
+  }
+}
+
 /* Week date strip */
 .ht-week {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   margin-bottom: 2.25rem;
 }
@@ -166,8 +184,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  min-width: 2.75rem;
-  padding: 0.55rem 0.4rem;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.55rem 0.2rem;
   border-radius: 8px;
   border: 1px solid var(--surface-line);
   background: var(--surface);

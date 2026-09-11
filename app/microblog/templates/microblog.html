@@ -53,12 +53,12 @@
 
       <section class="entries">
         {% for entry_id, content, date in entries %}
-        <article class="entry {% if loop.first %}featured{% endif %}">
+        <article class="entry">
           <div class="entry-day"><span>{{ date }}</span></div>
           <p class="entry-body">{{ content }}</p>
         </article>
         {% else %}
-        <p class="entry-body">No entries yet — write the first one above.</p>
+        <p class="entries-empty">No entries yet — write the first one above.</p>
         {% endfor %}
       </section>
     </div>
