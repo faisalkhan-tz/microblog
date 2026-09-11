@@ -6,14 +6,16 @@
     <title>{{ title }}</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('habit_tracker.static', filename='habit_tracker.css') }}"
-    />
+      href="{{ url_for('habit_tracker.static', filename='habit_tracker.css') }}" />
   </head>
   <body>
     <header class="ht-header">
       <h1 class="ht-header__title">Habits</h1>
-      <a class="ht-header__add" href="{{ url_for('habit_tracker.add_habit') }}">+ Add new</a>
+      <a class="ht-header__add" href="{{ url_for('habit_tracker.add_habit') }}"
+        >+ Add new</a
+      >
     </header>
+    {% block calendar %}{% endblock %}
     <main class="ht-main">{% block main_content %}{% endblock %}</main>
   </body>
 </html>

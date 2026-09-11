@@ -1,4 +1,5 @@
-{% extends "habit-tracker/layout.html" %}
+{% extends "layout.html" %}
+{% block calendar %}{% include "_calendar.html" %}{% endblock %}
 {% block main_content %}
 <form class="ht-form" action="{{ url_for('habit_tracker.add_habit') }}" method="post">
   <label class="ht-form__label" for="name">Habit name</label>

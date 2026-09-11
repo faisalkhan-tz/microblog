@@ -6,18 +6,18 @@ from app.habit_tracker import bp
 from bson import ObjectId
 
 
-@bp.route("/")
-def index():
-    date_str = request.args.get("date")
+def _parse_selected_date(date_str):
     try:
-        selected_date = (
+        return (
             datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
             if date_str
             else datetime.date.today()
         )
     except ValueError:
-        selected_date = datetime.date.today()
+        return datetime.date.today()
 
+
+def _build_week(selected_date):
     week = []
     for offset in range(-3, 4):
         day = selected_date + datetime.timedelta(days=offset)
@@ -28,6 +28,14 @@ def index():
                 "day_number": day.strftime("%d"),
             }
         )
+    return week
+
+
+@bp.route("/")
+def index():
+    date_str = request.args.get("date")
+    selected_date = _parse_selected_date(date_str)
+    week = _build_week(selected_date)
 
     habits = []
     if mongo.db is not None:
@@ -42,7 +50,7 @@ def index():
             habits.append({"_id": habit["_id"], "name": habit["name"], "done": done})
 
     return render_template(
-        "habit-tracker/index.html",
+        "index.html",
         title="Habit Tracker - Home",
         week=week,
         selected_date=selected_date.strftime("%Y-%m-%d"),
@@ -57,8 +65,14 @@ def add_habit():
         if name and mongo.db is not None:
             mongo.db.habits.insert_one({"name": name})
         return redirect(url_for("habit_tracker.index"))
+
+    selected_date = _parse_selected_date(request.args.get("date"))
+    week = _build_week(selected_date)
     return render_template(
-        "habit-tracker/add_habit.html", title="Habit Tracker - Add Habit"
+        "add_habit.html",
+        title="Habit Tracker - Add Habit",
+        week=week,
+        selected_date=selected_date.strftime("%Y-%m-%d"),
     )
 
 

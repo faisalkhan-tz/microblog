@@ -1,13 +1,7 @@
-{% extends "habit-tracker/layout.html" %}
+{% extends "layout.html" %}
+{% block calendar %}{% include "_calendar.html" %}{% endblock %}
 {% block main_content %}
-<nav class="ht-week" aria-label="Select a date">
-  {% for day in week %}
-  <a
-    class="ht-week__day {% if day.iso == selected_date %}ht-week__day--active{% endif %}"
-    href="{{ url_for('habit_tracker.index', date=day.iso) }}"
-  >{{ day.label }} {{ day.day_number }}</a>
-  {% endfor %}
-</nav>
+
 
 <ul class="ht-list">
   {% for habit in habits %}
