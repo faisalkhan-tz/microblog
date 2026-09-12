@@ -11,6 +11,9 @@ def create_app(config_class=DevConfig):
 
     from app.microblog import bp as microblog_bp
     from app.habit_tracker import bp as habit_tracker_bp
+    from app.portfolio import bp as portfolio
+
+    app.register_blueprint(portfolio, url_prefix="/portfolio")
     app.register_blueprint(microblog_bp, url_prefix="/microblog")
     app.register_blueprint(habit_tracker_bp)
     return app

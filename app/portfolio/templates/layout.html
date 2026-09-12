@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ owner_name }} — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('portfolio.static', filename='portfolio.css') }}"
+    />
+  </head>
+  <body>
+    <div class="pf-page">
+      <header class="pf-header">
+        <h1 class="pf-name">{{ owner_name }}</h1>
+        <nav class="pf-nav" aria-label="Primary">
+          <a
+            class="{% if active == 'projects' %}active{% endif %}"
+            href="{{ url_for('portfolio.index') }}"
+            >Projects</a
+          >
+          <a
+            class="{% if active == 'about' %}active{% endif %}"
+            href="{{ url_for('portfolio.about') }}"
+            >About</a
+          >
+          <a
+            class="{% if active == 'contact' %}active{% endif %}"
+            href="{{ url_for('portfolio.contact') }}"
+            >Contact</a
+          >
+        </nav>
+      </header>
+      <main class="pf-main">{% block main_content %}{% endblock %}</main>
+    </div>
+  </body>
+</html>
