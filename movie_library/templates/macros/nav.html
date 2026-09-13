@@ -1,0 +1,37 @@
+{% macro header(email, theme) %}
+<header class="site-header">
+  <nav class="container">
+    <ul>
+      <li>
+        <a href="{{ url_for('movie_library.index') }}" class="brand">
+          🎬 <strong>WatchList</strong>
+        </a>
+      </li>
+    </ul>
+    <ul>
+      {% if not email %}
+      <li><a href="{{ url_for('movie_library.login') }}" class="contrast">Login</a></li>
+      <li><a href="{{ url_for('movie_library.register') }}" role="button">Register</a></li>
+      {% else %}
+      <li>
+        <a
+          href="{{ url_for('movie_library.index') }}"
+          class="{{ 'active' if request.path == url_for('movie_library.index') }}"
+          >Movies</a
+        >
+      </li>
+      <li><a href="{{ url_for('movie_library.logout') }}" role="button" class="outline">Logout</a></li>
+      {% endif %}
+      <li>
+        <a
+          href="{{ url_for('movie_library.toggle_theme', current_page=request.path) }}"
+          class="theme-toggle"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+          >{{ '☀️' if theme == 'dark' else '🌙' }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>
+{% endmacro %}

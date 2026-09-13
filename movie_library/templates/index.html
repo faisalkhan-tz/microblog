@@ -1,0 +1,47 @@
+{% extends 'layout.html' %} {% block main_content %}
+<section class="container movies-section">
+  <div class="movies-header">
+    <hgroup>
+      <h1>Movies</h1>
+      <h2>{{ movies|length }} title{{ '' if movies|length == 1 else 's' }} in your WatchList</h2>
+    </hgroup>
+    <a href="{{ url_for('movie_library.add') }}" role="button">+ Add Movie</a>
+  </div>
+
+  {% if movies %}
+  <div class="movie-grid">
+    {% for movie in movies %}
+    <article class="movie-card">
+      <header>
+        <hgroup>
+          <h3><a href="{{ url_for('movie_library.movie', _id=movie._id) }}" class="stretched-link">{{ movie.title }}</a></h3>
+          <h4>{{ movie.year }}</h4>
+        </hgroup>
+      </header>
+      <p><strong>Director:</strong> {{ movie.director }}</p>
+      {% if movie.rating %}
+      <p class="movie-rating" aria-label="Rating {{ movie.rating }} out of 10">
+        {{ '★' * movie.rating }}{{ '☆' * (10 - movie.rating) }}
+      </p>
+      {% endif %}
+      {% if movie.description %}
+      <p class="movie-description">{{ movie.description }}</p>
+      {% endif %}
+      {% if movie.tags %}
+      <footer class="movie-tags">
+        {% for tag in movie.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </footer>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <article class="empty-state">
+    <p>No movies yet. Start building your WatchList.</p>
+    <a href="{{ url_for('movie_library.add') }}" role="button">+ Add your first movie</a>
+  </article>
+  {% endif %}
+</section>
+{% endblock %}

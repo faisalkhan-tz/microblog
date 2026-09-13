@@ -1,0 +1,21 @@
+{% from 'macros/fields.html' import render_text_field %} {% extends 'layout.html'
+%} {% block main_content %}
+<section class="container movie-form-section">
+  <article class="movie-form-card">
+    <hgroup>
+      <h1>Log In</h1>
+      <h2>Welcome back to WatchList</h2>
+    </hgroup>
+    <form name="login" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_text_field(form.email) }}
+      {{ render_text_field(form.password) }}
+      {{ form.submit() }}
+    </form>
+    <p class="form-footer-link">
+      Don't have an account?
+      <a href="{{ url_for('movie_library.register') }}">Register</a>
+    </p>
+  </article>
+</section>
+{% endblock %}

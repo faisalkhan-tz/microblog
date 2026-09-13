@@ -1,0 +1,108 @@
+{% extends 'layout.html' %} {% block main_content %}
+<section class="container movie-detail-section">
+  <a href="{{ url_for('movie_library.index') }}" class="back-link"
+    >&larr; Back to Movies</a
+  >
+
+  <article class="movie-detail">
+    {% set embed_url = movie.video_link | youtube_embed_url %}
+    <div class="movie-preview">
+      {% if embed_url %}
+      <iframe
+        class="movie-preview-frame"
+        src="{{ embed_url }}"
+        title="{{ movie.title }} trailer"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+      {% elif movie.video_link %}
+      <video class="movie-preview-frame" controls preload="metadata">
+        <source src="{{ movie.video_link }}" />
+        Your browser does not support the video tag.
+      </video>
+      {% else %}
+      <div class="movie-preview-placeholder" aria-hidden="true">
+        <span>🎬</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <header class="movie-detail-header">
+      <hgroup>
+        <h1>
+          {{ movie.title }}
+          {% if movie.user and movie.user == session.get('user_id') %}
+          <a
+            class="edit-icon-link"
+            href="{{ url_for('movie_library.update_movie', _id=movie._id) }}"
+            aria-label="Edit movie"
+            >&#9999;&#65039;</a
+          >
+          {% endif %}
+        </h1>
+        <h2>{{ movie.year }} &middot; Directed by {{ movie.director }}</h2>
+      </hgroup>
+      <form
+        class="rating-widget"
+        role="group"
+        aria-label="Rate this movie"
+        method="post"
+        action="{{ url_for('movie_library.rate_movie', _id=movie._id) }}"
+      >
+        {% for i in range(1, 11) %}
+        <button
+          type="submit"
+          name="rating"
+          value="{{ i }}"
+          class="rating-star {{ 'filled' if movie.rating >= i }}"
+          aria-label="Rate {{ i }} out of 10"
+        >
+          &#9733;
+        </button>
+        {% endfor %}
+      </form>
+    </header>
+
+    <a
+      class="watched-badge"
+      href="{{ url_for('movie_library.watch_today', _id=movie._id) }}"
+      >{% if movie.last_watched %}Last watched {{
+      movie.last_watched.strftime('%B %d, %Y') }}{% else %}Mark as watched
+      today{% endif %}</a
+    >
+
+    {% if movie.description %}
+    <p class="movie-detail-description">{{ movie.description }}</p>
+    {% endif %} {% if movie.cast or movie.series %}
+    <div class="movie-detail-grid">
+      {% if movie.cast %}
+      <div>
+        <h3>Cast</h3>
+        <p>{{ movie.cast | join(', ') }}</p>
+      </div>
+      {% endif %} {% if movie.series %}
+      <div>
+        <h3>Series</h3>
+        <p>{{ movie.series | join(', ') }}</p>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %} {% if movie.tags %}
+    <footer class="movie-tags">
+      {% for tag in movie.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </footer>
+    {% endif %} {% if movie.video_link %}
+    <a
+      class="external-link"
+      href="{{ movie.video_link }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Open video link &#8599;</a
+    >
+    {% endif %}
+  </article>
+</section>
+{% endblock %}

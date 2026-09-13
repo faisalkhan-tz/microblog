@@ -1,0 +1,29 @@
+{% macro render_text_field(field) %}
+{% set invalid = "true" if field.errors else ("false" if field.data else none) %}
+<label>
+  {{ field.label.text }}
+  {% if invalid %}
+  {{ field(**{"aria-invalid": invalid}) }}
+  {% else %}
+  {{ field() }}
+  {% endif %}
+  {% for error in field.errors %}
+  <small class="field-error">{{ error }}</small>
+  {% endfor %}
+</label>
+{% endmacro %}
+
+{% macro render_textarea_field(field) %}
+{% set invalid = "true" if field.errors else ("false" if field.data else none) %}
+<label>
+  {{ field.label.text }}
+  {% if invalid %}
+  {{ field(**{"aria-invalid": invalid, "rows": 5}) }}
+  {% else %}
+  {{ field(**{"rows": 5}) }}
+  {% endif %}
+  {% for error in field.errors %}
+  <small class="field-error">{{ error }}</small>
+  {% endfor %}
+</label>
+{% endmacro %}

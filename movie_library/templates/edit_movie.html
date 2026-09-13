@@ -1,0 +1,24 @@
+{% from 'macros/fields.html' import render_text_field, render_textarea_field %} 
+{% extends 'layout.html'%} 
+{% block main_content %}
+<section class="container movie-form-section">
+  <article class="movie-form-card">
+    <hgroup>
+      <h1>Edit Movie</h1>
+      <h2>Update movie details</h2>
+    </hgroup>
+    <form name="edit_movie" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_text_field(form.title) }}
+      {{ render_text_field(form.director) }}
+      {{ render_text_field(form.year) }}
+      {{ render_textarea_field(form.description) }}
+      {{ render_text_field(form.cast) }}
+      {{ render_text_field(form.series) }}
+      {{ render_text_field(form.tags) }}
+      {{ render_text_field(form.video_link) }}
+      {{ form.submit() }}
+    </form>
+  </article>
+</section>
+{% endblock %}
